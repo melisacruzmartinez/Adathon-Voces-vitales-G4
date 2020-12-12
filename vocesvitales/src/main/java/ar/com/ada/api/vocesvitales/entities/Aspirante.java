@@ -1,6 +1,11 @@
 package ar.com.ada.api.vocesvitales.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -30,9 +35,9 @@ public class Aspirante {
     @Column (name = "direccion", nullable = false, length = 200)
     private int direccion;
     //nueva opcion de habilidades se reemplaza por experiencia
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "experiencia_choise", referencedColumnName = "id")
-    private Experiencia experiencia;
+    @OneToMany(mappedBy = "aspirante", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore   
+     private List<Experiencia> experiencia = new ArrayList<>();
 
     @Column (name = "estado", nullable = false)
     private int estado;
@@ -118,12 +123,13 @@ public class Aspirante {
         this.estado = estado;
     }
 
-    public Experiencia getExperiencia() {
+    public List<Experiencia> getExperiencia() {
         return experiencia;
     }
 
-    public void setExperiencia(Experiencia experiencia) {
+    public void setExperiencia(List<Experiencia> experiencia) {
         this.experiencia = experiencia;
     }
 
+    
 }

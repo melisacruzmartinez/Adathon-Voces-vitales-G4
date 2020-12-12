@@ -14,4 +14,9 @@ public class Experiencia {
     private Integer id;
     @Column (name = "experiencia", nullable = false, length = 100)
     private String experiencia;
+    
+    @JoinColumn(name = "aspirante", referencedColumnName = "id")
+    @ManyToOne
+    private Aspirante aspirante;
+    
 }
