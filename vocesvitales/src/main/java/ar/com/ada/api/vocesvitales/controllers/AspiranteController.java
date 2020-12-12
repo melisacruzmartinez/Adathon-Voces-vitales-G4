@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.ada.api.vocesvitales.entities.Aspirante;
+import ar.com.ada.api.vocesvitales.models.response.RespuestaFront;
 import ar.com.ada.api.vocesvitales.services.AspiranteService;
 
 @RestController
@@ -20,7 +21,11 @@ public class AspiranteController {
     @PostMapping("/aspirantes")
     public ResponseEntity<?> crearAspirante(@RequestBody Aspirante aspirante){
         aspiranteService.crearAspirante(aspirante);
-        return ResponseEntity.ok(aspirante.getId());
+        RespuestaFront respuestaFront = new RespuestaFront();
+        respuestaFront.isOk = true;
+        respuestaFront.id = aspirante.getId();
+        respuestaFront.message = "Aspirante guardado !";
+        return ResponseEntity.ok(respuestaFront);
     }
 
     @GetMapping("/aspirantes")
