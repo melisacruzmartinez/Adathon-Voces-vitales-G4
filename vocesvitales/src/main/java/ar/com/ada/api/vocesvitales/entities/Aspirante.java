@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
-@Table(name = "aspirantes")
+@Table(name = "aspirante")
 
 public class Aspirante {
     @Id
@@ -18,7 +18,7 @@ public class Aspirante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NaturalId
-    @Column (name = "dni", nullable = false)
+    @Column (name = "dni", nullable = true)
     private int dni;
     @Column (name = "nombre", nullable = false, length = 100)
     private String nombre;
@@ -26,20 +26,20 @@ public class Aspirante {
     private String apellido;
     @Column (name = "mail", nullable = false, length = 100)
     private String mail;
-    @Column (name = "telefono", nullable = false)
+    @Column (name = "telefono", nullable = true)
     private int telefono;
-    @Column (name = "detalle", nullable = false, length = 512)
+    @Column (name = "detalle", nullable = true, length = 512)
     private String detalle;
-    @Column (name = "horarios" , nullable = false, length = 100)
+    @Column (name = "horarios" , nullable = true, length = 100)
     private String horario;
-    @Column (name = "direccion", nullable = false, length = 200)
+    @Column (name = "direccion", nullable = true, length = 200)
     private int direccion;
     //nueva opcion de habilidades se reemplaza por experiencia
     @OneToMany(mappedBy = "aspirante", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore   
      private List<Experiencia> experiencia = new ArrayList<>();
 
-    @Column (name = "estado", nullable = false)
+    @Column (name = "estado", nullable = true)
     private int estado;
 
     public Integer getId() {
