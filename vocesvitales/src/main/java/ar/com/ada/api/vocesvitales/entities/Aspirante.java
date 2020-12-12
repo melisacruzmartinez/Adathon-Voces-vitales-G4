@@ -9,37 +9,42 @@ import org.hibernate.annotations.NaturalId;
 
 public class Aspirante {
     @Id
-    @Column (name = "aspirante_id")
+    @Column (name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer aspiranteId;
+    private Integer id;
     @NaturalId
-    @Column (name = "aspirante_dni", nullable = false)
+    @Column (name = "dni", nullable = false)
     private int dni;
-    @Column (name = "aspirante_nombre", nullable = false, length = 100)
+    @Column (name = "nombre", nullable = false, length = 100)
     private String nombre;
-    @Column (name = "aspirante_apellido", nullable = false, length = 100)
+    @Column (name = "apellido", nullable = false, length = 100)
     private String apellido;
-    @Column (name = "aspirante_mail", nullable = false, length = 200)
+    @Column (name = "mail", nullable = false, length = 100)
     private String mail;
-    @Column (name = "aspirante_telefono", nullable = false)
+    @Column (name = "telefono", nullable = false)
     private int telefono;
-    @Column (name = "aspirante_info", nullable = false, length = 600)
-    private String detalleInscripta;
-    @Column (name = "aspirante_horarios" , nullable = false, length = 100)
+    @Column (name = "detalle", nullable = false, length = 512)
+    private String detalle;
+    @Column (name = "horarios" , nullable = false, length = 100)
     private String horario;
-    @Column (name = "aspirante_direccion", nullable = false, length = 200)
+    @Column (name = "direccion", nullable = false, length = 200)
     private int direccion;
-    @Column (name = "aspirante_experiencia", nullable = false)
-    private int experiencia;
+    //nueva opcion de habilidades se reemplaza por experiencia
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "experiencia_choise", referencedColumnName = "id")
+    private Experiencia experiencia;
 
-    
-    public void setAspiranteId(Integer aspiranteId) {
-        this.aspiranteId = aspiranteId;
+    @Column (name = "estado", nullable = false)
+    private int estado;
+
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getAspiranteId() {
-        return aspiranteId;
+    public void setId(Integer id) {
+        this.id = id;
     }
+
     public int getDni() {
         return dni;
     }
@@ -80,12 +85,12 @@ public class Aspirante {
         this.telefono = telefono;
     }
 
-    public String getDetalleInscripta() {
-        return detalleInscripta;
+    public String getDetalle() {
+        return detalle;
     }
 
-    public void setDetalleInscripta(String detalleInscripta) {
-        this.detalleInscripta = detalleInscripta;
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
     }
 
     public String getHorario() {
@@ -104,21 +109,21 @@ public class Aspirante {
         this.direccion = direccion;
     }
 
-    public int getExperiencia() {
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public Experiencia getExperiencia() {
         return experiencia;
     }
 
-    public void setExperiencia(int experiencia) {
+    public void setExperiencia(Experiencia experiencia) {
         this.experiencia = experiencia;
     }
-
-    @Override
-    public String toString() {
-        return "Aspirante [apellido=" + apellido + ", aspiranteId=" + aspiranteId + ", detalleInscripta="
-                + detalleInscripta + ", direccion=" + direccion + ", dni=" + dni + ", experiencia=" + experiencia
-                + ", horario=" + horario + ", mail=" + mail + ", nombre=" + nombre + ", telefono=" + telefono + "]";
-    }
-
-    
 
 }

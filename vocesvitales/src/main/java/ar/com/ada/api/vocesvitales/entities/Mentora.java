@@ -9,38 +9,35 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 @Table(name = "mentoras")
 
 public class Mentora {
-    
+
     @Id
-    @Column (name = "mentora_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer mentoraId;
+    private Integer id;
+    @OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "aspirante_fk", referencedColumnName = "id")
+    private Aspirante aspirante;
     @JsonFormat(pattern = "yyyy-mm-dd", shape = Shape.STRING)
-    @Column (name = "mentora_alta", nullable = false)
+    @Column(name = "fecha_alta", nullable = false)
     private String fechaAlta;
     @JsonFormat(pattern = "yyyy-mm-dd", shape = Shape.STRING)
-    @Column (name = "mentora_baja", nullable = true)
-    private String fechaBaja;
-    @Column (name = "mentora_tipo",nullable = true, length = 500)
+    @Column(name = "tipo_mentoria", nullable = true, length = 512)
     private String tipoMentoria;
-    @Column (name = "mentora_contador", nullable = true)
+    @Column(name = "cant_mentorias", nullable = true)
     private int cantMentorias;
-    @Column (name = "mentora_razon_baja",nullable = true, length = 500)
+    @Column(name = "logros", nullable = false, length = 512)
+    private String logros;
+    @Column(name = "fecha_baja", nullable = true)
+    private String fechaBaja;
+    @Column(name = "razon_baja", nullable = true, length = 512)
     private String razonBaja;
-    @Column (name = "mentora_horario",nullable = false, length = 200)
-    private String horario;
-    @Column (name = "mentora_logros",nullable = false, length = 500)
-    private String mentoriaLogros;
-    @Column (name = "mentora_certificado",nullable = true)
-    private boolean certificado;
 
-    
-   
-    public Integer getMentoraId() {
-        return mentoraId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMentoraId(Integer mentoraId) {
-        this.mentoraId = mentoraId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getFechaAlta() {
@@ -83,35 +80,13 @@ public class Mentora {
         this.razonBaja = razonBaja;
     }
 
-    public String getHorario() {
-        return horario;
+    public String getLogros() {
+        return logros;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
+    public void setLogros(String logros) {
+        this.logros = logros;
     }
 
-    public String getMentoriaLogros() {
-        return mentoriaLogros;
-    }
-
-    public void setMentoriaLogros(String mentoriaLogros) {
-        this.mentoriaLogros = mentoriaLogros;
-    }
-
-    public boolean isCertificado() {
-        return certificado;
-    }
-
-    public void setCertificado(boolean certificado) {
-        this.certificado = certificado;
-    }
-
-    @Override
-    public String toString() {
-        return "Mentora [cantMentorias=" + cantMentorias + ", certificado=" + certificado + ", fechaAlta=" + fechaAlta
-                + ", fechaBaja=" + fechaBaja + ", horario=" + horario + ", mentoraId=" + mentoraId + ", mentoriaLogros="
-                + mentoriaLogros + ", razonBaja=" + razonBaja + ", tipoMentoria=" + tipoMentoria + "]";
-    }
-
+   
 }
