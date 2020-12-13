@@ -1,6 +1,8 @@
 package ar.com.ada.api.vocesvitales.controllers;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import ar.com.ada.api.vocesvitales.entities.Experiencia;
 import ar.com.ada.api.vocesvitales.models.request.AspiranteAllInfo;
 import ar.com.ada.api.vocesvitales.models.request.AspiranteInfoBasic;
 import ar.com.ada.api.vocesvitales.models.response.RespuestaFront;
+import ar.com.ada.api.vocesvitales.repos.ExperienciaRepo;
 import ar.com.ada.api.vocesvitales.services.AspiranteService;
 import ar.com.ada.api.vocesvitales.services.ExperienciaService;
 
@@ -27,13 +30,20 @@ public class AspiranteController {
     AspiranteService aspiranteService;
     @Autowired
     ExperienciaService experienciaService;
+    @Autowired
+    ExperienciaRepo experienciaRepo;
     @PostMapping("/aspirantes")
     public ResponseEntity<?> crearAspirante(@RequestBody AspiranteInfoBasic info){
         Aspirante aspirante = new Aspirante();
         aspirante.setNombre(info.nombre);
         aspirante.setApellido(info.apellido);
         aspirante.setMail(info.mail);
-
+        //iterando el array de experiencias
+        
+            Optional<Experiencia> persistentExperiencia = experienciaRepo.findById(info.experiencia.getId());
+            if(persistentExperiencia.isPresent())
+              aspirante.setExperiencias(persistentExperiencia.get());
+        
         // Experiencia experiencia = experienciaService.obtenerPorId(info.experienciaId);
         // aspirante.setExperienciaId(experiencia);
         
@@ -76,6 +86,10 @@ public class AspiranteController {
         aspirante.setHorario(info.horario);
         aspirante.setDireccion(info.direccion);
         aspirante.setEstado(info.estado);
+        
+        Optional<Experiencia> persistentExperiencia = experienciaRepo.findById(info.experiencia.getId());
+            if(persistentExperiencia.isPresent())
+              aspirante.setExperiencias(persistentExperiencia.get());
 
         aspiranteService.grabar(aspirante);
         RespuestaFront gR = new RespuestaFront();

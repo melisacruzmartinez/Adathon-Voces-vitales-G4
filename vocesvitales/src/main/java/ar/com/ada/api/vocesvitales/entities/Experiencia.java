@@ -11,11 +11,8 @@ public class Experiencia {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column (name = "experiencia", nullable = false, length = 100)
-    private String experiencia;
-    @JoinColumn(name = "aspirante", referencedColumnName = "id")
-    @ManyToOne
-    private Aspirante aspirante;
+    @Column (name = "descripcion", nullable = false, length = 100)
+    private String descripcion;
 
     public Integer getId() {
         return id;
@@ -25,20 +22,15 @@ public class Experiencia {
         this.id = id;
     }
 
-    public String getExperiencia() {
-        return experiencia;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setExperiencia(String experiencia) {
-        this.experiencia = experiencia;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public Aspirante getAspirante() {
-        return aspirante;
-    }
+    
 
-    public void setAspirante(Aspirante aspirante) {
-        this.aspirante = aspirante;
-    }
     
 }

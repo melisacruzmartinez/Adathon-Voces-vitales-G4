@@ -1,7 +1,9 @@
 package ar.com.ada.api.vocesvitales.entities;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -35,11 +37,13 @@ public class Aspirante {
     @Column (name = "direccion", nullable = true, length = 200)
     private String direccion;
     //nueva opcion de habilidades se reemplaza por experiencia
-    @OneToMany(mappedBy = "aspirante", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-     private int experienciaId;
+    @OneToOne(cascade = CascadeType.ALL)
+        private Experiencia experiencias;
 
     @Column (name = "estado", nullable = true, length = 48)
     private String estado;
+
+    
 
     public Integer getId() {
         return id;
@@ -104,16 +108,8 @@ public class Aspirante {
     public void setHorario(String horario) {
         this.horario = horario;
     }
-
     
 
-    public int getExperienciaId() {
-        return experienciaId;
-    }
-
-    public void setExperienciaId(int experienciaId) {
-        this.experienciaId = experienciaId;
-    }
 
     public String getDireccion() {
         return direccion;
@@ -130,6 +126,17 @@ public class Aspirante {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public Experiencia getExperiencias() {
+        return experiencias;
+    }
+
+    public void setExperiencias(Experiencia experiencias) {
+        this.experiencias = experiencias;
+    }
+
+
+  
 
     
 

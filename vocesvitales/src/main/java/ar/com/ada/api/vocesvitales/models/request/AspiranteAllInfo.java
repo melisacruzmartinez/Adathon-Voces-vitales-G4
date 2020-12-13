@@ -1,5 +1,7 @@
 package ar.com.ada.api.vocesvitales.models.request;
 
+import ar.com.ada.api.vocesvitales.entities.Experiencia;
+
 public class AspiranteAllInfo {
     public int dni;
     public String nombre;
@@ -11,7 +13,8 @@ public class AspiranteAllInfo {
     public String horario;
     public String direccion;
     public String estado;
-
+    public Experiencia experiencia;
+}
  
 
-}
+
