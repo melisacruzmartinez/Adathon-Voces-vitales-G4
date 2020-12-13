@@ -19,4 +19,11 @@ public class AspiranteService {
     public List<Aspirante> obtenerAspirantes(){       
         return (repo.findAll());//traer todo
     }
+    public Aspirante obtenerPorId(int id){
+        return repo.findById(id);
+
+    }
+    public void grabar(Aspirante aspirante){
+        repo.save(aspirante);
+    }
 }

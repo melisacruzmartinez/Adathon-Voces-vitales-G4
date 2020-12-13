@@ -1,5 +1,6 @@
 package ar.com.ada.api.vocesvitales.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,19 @@ public class ExperienciaService {
     @Autowired
     private ExperienciaRepo repo;
 
-    public Experiencia obtenerPorId(int experienciaId){
+        public List<Experiencia> obtenerExperiencias(){
+            return(repo.findAll());
+
+        }
+        public Experiencia obtenerExperiencia(int experienciaId){
+
         Optional<Experiencia> ex = repo.findById(experienciaId);
         if(ex.isPresent())
-            return ex.get();
+             return ex.get();
         return null;
     }
+		public Experiencia obtenerPorId(int experienciaId) {
+			return null;
+		}
+
 }

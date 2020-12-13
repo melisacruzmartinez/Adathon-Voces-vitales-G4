@@ -33,14 +33,13 @@ public class Aspirante {
     @Column (name = "horarios" , nullable = true, length = 100)
     private String horario;
     @Column (name = "direccion", nullable = true, length = 200)
-    private int direccion;
+    private String direccion;
     //nueva opcion de habilidades se reemplaza por experiencia
     @OneToMany(mappedBy = "aspirante", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore   
-     private List<Experiencia> experiencia = new ArrayList<>();
+     private int experienciaId;
 
-    @Column (name = "estado", nullable = true)
-    private int estado;
+    @Column (name = "estado", nullable = true, length = 48)
+    private String estado;
 
     public Integer getId() {
         return id;
@@ -106,30 +105,35 @@ public class Aspirante {
         this.horario = horario;
     }
 
-    public int getDireccion() {
+    
+
+    public int getExperienciaId() {
+        return experienciaId;
+    }
+
+    public void setExperienciaId(int experienciaId) {
+        this.experienciaId = experienciaId;
+    }
+
+    public String getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(int direccion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
-
-    public int getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    public List<Experiencia> getExperiencia() {
-        return experiencia;
-    }
+    
 
-    public void setExperiencia(List<Experiencia> experiencia) {
-        this.experiencia = experiencia;
-    }
+   
 
     
 }
